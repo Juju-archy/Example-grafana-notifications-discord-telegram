@@ -44,7 +44,7 @@ Log in to your Grafana instance and navigate to the **Metrics in Grafana** tab o
         5. Enter your Telegram credentials: bot API token and chat ID.
         6. Click `Test` to verify the integration. If it fails, double-check your credentials.
         7. Click `Save contact point`.
-   - **Discord Notifications**:
+   - **[Discord Notifications](https://grafana.com/docs/grafana/latest/alerting/configure-notifications/manage-contact-points/integrations/configure-discord/)**:
      1. In your Discord server, create a new channel.
      2. Click `Edit Channel` > `Integrations` > `New Webhook`.
      3. Create a webhook and copy the URL:
@@ -95,7 +95,7 @@ Now that we’ve tested that the connection works, we will add this contact poin
 1. In Grafana’s sidebar, navigate to Notification policies
 2. Under Default policy, click the **ellipsis icon (…)**
 3. Click Edit
-4. Change the Default contact point to `telegram`
+4. Change the Default contact point to `telegram`or `discord`
 
 ### Saving and Activating the Alert
 Once all configurations are complete, click **Save** to store the alert.
