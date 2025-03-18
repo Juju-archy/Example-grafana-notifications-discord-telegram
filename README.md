@@ -11,54 +11,60 @@ This guide explains how to configure a Grafana alert based on an application's R
 ### Connecting to Grafana
 Log in to your Grafana instance and navigate to the **Metrics in Grafana** tab of your organization.
 
+### Adding a Telegram or Discord Notification Channel
+
 ### Configuring Notifications
 1. Go to the **Notifications** tab.
 2. Add a Telegram or Discord notification channel:
-   - **[Telegram Notifications](https://grafana.com/docs/grafana/latest/alerting/configure-notifications/manage-contact-points/integrations/configure-telegram/)**:
-     1. Create a Telegram bot via [@BotFather](https://t.me/BotFather).
-        1. (Search => @BotFather)
-     2. Obtain the bot **TOKEN** and add the bot to a Telegram group.
-        1. Type `/newbot`
-        2. Choose a name and username. It must end in `bot` or `_bot`. E.g., `my_bot`.
-        3. Copy the API token.
-     3. Retrieve the group chat ID using the Telegram API.
-        1. To get the `chat_id`, modify the following URL with `{your_bot_api_token}`:
-        ```sh
-        https://api.telegram.org/bot{your_bot_api_token}/getUpdates
-        ```
-        2. If successful, the response should be in JSON format:
-        ```sh
-        ...
-        "chat": {
-                "id": -4065678900,
-                "title": "Tony and Hello world bot",
-                "type": "group",
-        ...
-        ```
-     4. Configure Grafana to send notifications to this chat:
-        1. Toggle the side menu and navigate to `Alerting` > `Contact points`.
-        2. Click `+ Add contact point`.
-        ![Grafana Telegram](pictures/telegram-grafana-alerting-contact-point-.png)
-        3. Name the contact point, e.g., `telegram-notification`.
-        4. Under `Integration`, select `Telegram`.
-        5. Enter your Telegram credentials: bot API token and chat ID.
-        6. Click `Test` to verify the integration. If it fails, double-check your credentials.
-        7. Click `Save contact point`.
-   - **[Discord Notifications](https://grafana.com/docs/grafana/latest/alerting/configure-notifications/manage-contact-points/integrations/configure-discord/)**:
-     1. In your Discord server, create a new channel.
-     2. Click `Edit Channel` > `Integrations` > `New Webhook`.
-     3. Create a webhook and copy the URL:
-     ```sh
-     https://discord.com/api/webhooks/{123456789}/{123456789azerty}
-     ```
-     4. Add the webhook URL to Grafana's notification settings:
-        1. Toggle the side menu and navigate to `Alerting` > `Contact points`.
-        2. Click `+ Add contact point`.
-        3. Name the contact point, e.g., `discord-notification`.
-        4. Under `Integration`, select `Discord`.
-        5. Enter your credentials: `Webhook URL`.
-        6. Click `Test` to verify the integration. If it fails, double-check your credentials.
-        7. Click `Save contact point`.
+
+#### [Configuring Telegram](https://grafana.com/docs/grafana/latest/alerting/configure-notifications/manage-contact-points/integrations/configure-telegram/)
+
+   1. Create a Telegram bot via [@BotFather](https://t.me/BotFather).
+      1. (Search => @BotFather)
+   2. Obtain the bot **TOKEN** and add the bot to a Telegram group.
+      1. Type `/newbot`
+      2. Choose a name and username. It must end in `bot` or `_bot`. E.g., `my_bot`.
+      3. Copy the API token.
+   3. Retrieve the group chat ID using the Telegram API.
+      1. To get the `chat_id`, modify the following URL with `{your_bot_api_token}`:
+      ```sh
+      https://api.telegram.org/bot{your_bot_api_token}/getUpdates
+      ```
+      2. If successful, the response should be in JSON format:
+      ```sh
+      ...
+      "chat": {
+               "id": -4065678900,
+               "title": "Tony and Hello world bot",
+               "type": "group",
+      ...
+      ```
+   4. Configure Grafana to send notifications to this chat:
+      1. Toggle the side menu and navigate to `Alerting` > `Contact points`.
+      2. Click `+ Add contact point`.
+      ![Grafana Telegram](pictures/telegram-grafana-alerting-contact-point-.png)
+      3. Name the contact point, e.g., `telegram-notification`.
+      4. Under `Integration`, select `Telegram`.
+      5. Enter your Telegram credentials: bot API token and chat ID.
+      6. Click `Test` to verify the integration. If it fails, double-check your credentials.
+      7. Click `Save contact point`.
+      
+  #### [Configuring Discord](https://grafana.com/docs/grafana/latest/alerting/configure-notifications/manage-contact-points/integrations/configure-discord/)
+
+   1. In your Discord server, create a new channel.
+   2. Click `Edit Channel` > `Integrations` > `New Webhook`.
+   3. Create a webhook and copy the URL:
+   ```sh
+   https://discord.com/api/webhooks/{123456789}/{123456789azerty}
+   ```
+   4. Add the webhook URL to Grafana's notification settings:
+      1. Toggle the side menu and navigate to `Alerting` > `Contact points`.
+      2. Click `+ Add contact point`.
+      3. Name the contact point, e.g., `discord-notification`.
+      4. Under `Integration`, select `Discord`.
+      5. Enter your credentials: `Webhook URL`.
+      6. Click `Test` to verify the integration. If it fails, double-check your credentials.
+      7. Click `Save contact point`.
 
 ### Creating the Alert
 1. Click the **+** button and select **Create alert rule**.
@@ -79,6 +85,7 @@ Log in to your Grafana instance and navigate to the **Metrics in Grafana** tab o
    - **Mode:** Strict
 4. In the third box **Threshold**, set the following condition:
    - **Input B IS BELOW 0.15** (below 15%)
+   >Note: This threshold (0.15) is just an example, representing 15% of total RAM usage. Adjust this value according to your application's requirements.
 
 ### Configuring Alert Evaluation Behavior
 1. **Folder:** Select the folder where the alert will be saved.
